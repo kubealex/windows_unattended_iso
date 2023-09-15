@@ -1,0 +1,1 @@
+WIN-VMC89VFULRH.rh-lab.labs ansible_connection=winrm ansible_winrm_server_cert_validation=ignore ansible_user=Administrator ansible_password=redhat
