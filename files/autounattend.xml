@@ -109,6 +109,16 @@
                     <Description>Prepare for Ansible </Description>
                     <Order>3</Order>
                 </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>powershell -NoLogo -Command "Invoke-WebRequest -Uri https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.229-1/virtio-win-gt-x64.msi -OutFile C:\Windows\Temp\virtio.msi"</CommandLine>
+                    <Description>Prepare for Ansible </Description>
+                    <Order>4</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>powershell -NoLogo -Command "Invoke-Expression 'msiexec /i C:\Windows\Temp\virtio.msi /qn /norestart'"</CommandLine>
+                    <Description>Prepare for virtio </Description>
+                    <Order>5</Order>
+                </SynchronousCommand>
             </FirstLogonCommands>
         </component>
     </settings>
@@ -135,21 +145,6 @@
                     <Profile>all</Profile>
                 </FirewallGroup>
             </FirewallGroups>
-        </component>
-        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <RunSynchronous>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>1</Order>
-                    <Path>powershell -NoLogo -Command "Invoke-WebRequest -Uri https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.229-1/virtio-win-gt-x64.msi -OutFile C:\Windows\Temp\setup64.exe"</Path>
-                    <Description>Download tools deployment script</Description>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>2</Order>
-                    <Path>powershell -NoLogo -Command "Invoke-Expression 'msiexec /i C:\Windows\Temp\setup64.exe /qn /norestart'"</Path>
-                    <Description>Install VMWare tools</Description>
-                    <WillReboot>Always</WillReboot>
-                </RunSynchronousCommand>
-            </RunSynchronous>
         </component>
         <component name="Microsoft-Windows-TerminalServices-RDP-WinStationExtensions" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <SecurityLayer>1</SecurityLayer>
